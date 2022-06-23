@@ -1,0 +1,66 @@
+﻿@model IEnumerable<prjMvcDemo.tProduct>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>產品一覽</h2>
+@using (Html.BeginForm())
+{
+    @:關鍵字 @Html.TextBox("txtKeyword")
+    <input type="submit" value="查詢" />
+}
+
+<p>
+    @Html.ActionLink("新增", "New", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table table-success table-striped">
+    <tr>
+        <th>
+            序號
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fName) @*DisplayNamefor*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fPrice)
+        </th>
+        <th></th>
+    </tr>
+    @{
+        int count = 0;
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(++count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fName)  @*DisplayFor*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fQty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fPrice)
+                </td>
+                <td>
+                    @Html.ActionLink("編輯", "Edit", "Product", new { id = item.fId }, new { @class = "btn btn-success" }) |
+                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ },new { @class="btn btn-info"}) |*@
+                    @Html.ActionLink("刪除", "Delete", "Product", new { id = item.fId }, new { onclick = "return confirm('確認刪除?')", @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    }
+
+
+</table>

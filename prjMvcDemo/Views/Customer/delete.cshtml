@@ -1,0 +1,21 @@
+﻿@using prjMvcDemo.Models
+@using System.Linq;
+@model List<CCustomer>
+@{
+    ViewBag.Title = "delete";
+}
+
+<h2>刪除客戶</h2>
+
+
+<select>
+    @{
+        
+        foreach(CCustomer c in Model)
+            {
+                <option>@c.fName</option>
+            }
+    }
+</select>
+
+
